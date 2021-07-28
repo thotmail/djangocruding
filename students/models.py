@@ -1,4 +1,4 @@
 from django.db import models
 
-class Student:
+class Student(models.Model):
     name = models.CharField(max_length=200)
