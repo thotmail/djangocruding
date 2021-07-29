@@ -1,0 +1,12 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <h1>Library Home</h1>
+  <p>Welcome to a Library</p>
+  <h2>Stats:</h2>
+  <ul>
+    <li><strong>Books:</strong> {{ num_books }}</li>
+    <li><strong>Authors:</strong> {{ num_authors }}</li>
+    <li><strong>Students:</strong> {{ num_students }}</li>
+  </ul>
+{% endblock %}
