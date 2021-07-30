@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+
+<h1>Students</h1>
+<ul>
+{% for student in object_list %}
+    <li>
+        <a href="{% url 'library:student_details' student.pk %}">{{ student.name }}</a>
+    </li>
+{% empty %}
+    <li>No students yet.</li>
+{% endfor %}
+</ul>
+
+{% endblock %}

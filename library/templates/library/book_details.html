@@ -17,4 +17,16 @@
   {% if book.synopsis %}
         <p> {{ book.synopsis }} </p>
   {% endif %}
+  {% if user.is_authenticated %}
+    <div class="button-container">
+        <form action="{% url 'library:book_edit' book.pk %}" method="GET">
+            <input type="submit" value="Edit">
+        </form>
+
+        <form action="{% url 'library:book_delete' book.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+{% endif %}
 {% endblock %}

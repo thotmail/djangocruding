@@ -1,0 +1,18 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1> {{ student.name }} </h1>
+
+{% if user.is_authenticated %}
+    <div class="button-container">
+        <form action="{% url 'library:student_edit' student.pk %}" method="GET">
+            <input type="submit" value="Edit">
+        </form>
+
+        <form action="{% url 'library:student_delete' student.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+{% endif %}
+{% endblock %}

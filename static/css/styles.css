@@ -12,3 +12,12 @@ html,div{
 a{
     color: blueviolet;
 }
+
+.button-container * {
+    display: inline-block;
+}
+
+.button-container input {
+    display: inline-block;
+    vertical-align: middle;
+}

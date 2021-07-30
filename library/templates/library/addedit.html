@@ -1,0 +1,10 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+    <h1>{{edit_title}}</h1>
+    <form method="POST" action="{{post_target}}">
+        {%csrf_token%}
+        {{ form.as_p }}
+        <input type="submit" value="{{submit_text}}">
+    </form>
+{% endblock %}

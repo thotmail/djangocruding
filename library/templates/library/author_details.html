@@ -7,4 +7,16 @@
         <li><a href="{% url 'library:book_details' book.pk %}">{{ book | title}}</a></li>
     {% endfor %}
 </ul>
+{% if user.is_authenticated %}
+    <div class="button-container">
+        <form action="{% url 'library:author_edit' author.pk %}" method="GET">
+            <input type="submit" value="Edit">
+        </form>
+
+        <form action="{% url 'library:author_delete' author.pk %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" value="Delete">
+        </form>
+    </div>
+{% endif %}
 {% endblock %}

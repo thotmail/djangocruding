@@ -20,6 +20,10 @@
           <li><a href="{% url 'library:authors' %}">All authors</a></li>
           {% if user.is_authenticated %}
           <li>Hello {{ user }}</li>
+          <li><a href="{% url 'library:students' %}">All students</a></li>
+          <li><a href="{% url 'library:book_add' %}">Add book</a></li>
+          <li><a href="{% url 'library:author_add' %}">Add author</a></li>
+          <li><a href="{% url 'library:student_add' %}">Add student</a></li>
           <li><a href="{% url 'logout' %}">Logout</a></li>
           {% else %}
           <li><a href="{% url 'login' %}">Login</a></li>
@@ -27,7 +31,7 @@
         </ul>
      {% endblock %}
       </div>
-      <div class="col-sm-10 ">{% block content %}{% endblock %}</div>
+      <div class="col-sm-50 ">{% block content %}{% endblock %}</div>
     </div>
   </div>
 </body>
