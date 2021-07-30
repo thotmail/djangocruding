@@ -6,7 +6,7 @@
 <ul>
 {% for author in object_list %}
     <li>
-        {{ author.name }}
+        <a href="{% url 'library:author_details' author.pk %}">{{ author.name }}</a>
     </li>
 {% empty %}
     <li>No authors yet.</li>

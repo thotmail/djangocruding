@@ -1,5 +1,20 @@
 {% extends "base_generic.html" %}
 
 {% block content %}
-  
+  <h1> {{ book.title | title}} </h1>
+  {% if book.img_url %}
+  <img src="{{book.img_url}}">
+  {% endif %}
+  <h3>By:</h3>
+  <ul>
+  {% for a in book.authors.all %}
+        <li><a href="{% url 'library:author_details' a.pk %}">{{a.name}}</a></li> 
+  {% endfor %}
+  </ul>
+  <h3>Publisher:</h3>{{ book.publisher }}
+  <br><br>
+  <h4>Published on:</h4>{{ book.pub_date }}
+  {% if book.synopsis %}
+        <p> {{ book.synopsis }} </p>
+  {% endif %}
 {% endblock %}

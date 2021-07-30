@@ -3,3 +3,12 @@
     padding: 0;
     list-style: none;
 }
+
+html,div{
+    background-color: rgb(9, 34, 34);
+    color: grey;
+}
+
+a{
+    color: blueviolet;
+}
