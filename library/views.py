@@ -3,29 +3,13 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views import generic
 from django.utils import timezone
-from django.http import HttpResponseRedirect
-from django.forms import ModelForm
+from django.http import HttpResponseRedirect, HttpResponseBadRequest
 from django.urls import reverse
 
 from datetime import timedelta
 
 from .models import Book, Author, Student
-
-
-class AuthorForm(ModelForm):
-    class Meta:
-        model = Author
-        fields = '__all__'
-
-class BookForm(ModelForm):
-    class Meta:
-        model = Book
-        fields = '__all__'
-
-class StudentForm(ModelForm):
-    class Meta:
-        model = Student
-        fields = '__all__'
+from .forms import *
 
 class BookListView(generic.ListView):
     template_name = 'library/books.html'
@@ -53,6 +37,7 @@ class StudentDetailView(generic.DetailView, LoginRequiredMixin):
 
 
 def obj_add_edit(request, pk, obj, form_obj, obj_name, target):
+    '''helper function to avoid repeated code'''
     if request.method == "POST":
         if pk is not None:
             obj_instance = get_object_or_404(obj, pk=pk)
@@ -61,11 +46,13 @@ def obj_add_edit(request, pk, obj, form_obj, obj_name, target):
         else:
             form = form_obj(request.POST)
             rev = reverse(target)
-        form.save()
-        return HttpResponseRedirect(rev)
+        if(form.is_valid()):
+            form.save()
+            return HttpResponseRedirect(rev)
+        else:
+            return HttpResponseBadRequest("Data is invalid")
     else:
-        context = {
-        }
+        context = {}
         if pk is not None:
             obj_instance = get_object_or_404(obj, pk=pk)
             context['form'] = form_obj(instance=obj_instance)

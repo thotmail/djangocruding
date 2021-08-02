@@ -3,21 +3,26 @@
 {% block content %}
   <h1> {{ book.title | title}} </h1>
   {% if book.img_url %}
-  <img src="{{book.img_url}}">
+  <img src="{{book.img_url}}" alt="Image Unavailable">
   {% endif %}
   <h3>By:</h3>
-  <ul>
+  <ul class='secondary-list'>
   {% for a in book.authors.all %}
         <li><a href="{% url 'library:author_details' a.pk %}">{{a.name}}</a></li> 
   {% endfor %}
   </ul>
-  <h3>Publisher:</h3>{{ book.publisher }}
-  <br><br>
-  <h4>Published on:</h4>{{ book.pub_date }}
   {% if book.synopsis %}
-        <p> {{ book.synopsis }} </p>
+        <h3>Synopsis:</h3>
+        <ul class='secondary-list'> {{ book.synopsis }} </ul>
   {% endif %}
+  <h3>Publisher:</h3>
+  <ul class='secondary-list'>{{ book.publisher }}</ul>
+
+  <h4>Published on:</h4>
+  <ul class='secondary-list'>{{ book.pub_date }}</ul>
+  
   {% if user.is_authenticated %}
+  <br><br>
     <div class="button-container">
         <form action="{% url 'library:book_edit' book.pk %}" method="GET">
             <input type="submit" value="Edit">

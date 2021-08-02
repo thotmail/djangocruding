@@ -3,7 +3,7 @@
 {% block content %}
 
 <h1>Books</h1>
-<ul>
+<ul class='data-list'>
 {% for book in object_list %}
     <li>
         <a href="{% url 'library:book_details' book.pk %}">{{ book.title | title}}</a> 
